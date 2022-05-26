@@ -1,11 +1,18 @@
-export interface ApiData<T = any> {
-  kind: string
-  totalItems: number
-  items: T[]
+export interface IMeta {
+  pagination?: {
+    page: number
+    pageCount: number
+    pageSize: number
+    total: number
+  }
 }
 
-export interface IQueryParams {
-  q?: string
-  startIndex?: number
-  maxResults?: number
+export interface IData {
+  id: number
+  attributes: any
+}
+
+export interface IMetaData<T> {
+  data: T
+  meta: IMeta
 }

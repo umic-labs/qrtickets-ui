@@ -1,1 +1,1 @@
-export const VOLUMES = 'v1/volumes'
+export const EVENTS = 'events'

@@ -1,1 +1,1 @@
-export * from './volumes.api'
+export * from './events.api'

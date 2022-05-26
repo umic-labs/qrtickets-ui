@@ -1,15 +1,17 @@
-import React from 'react'
-import { Shelf } from '../components/home'
+import React, { useEffect, useState } from 'react'
 import { Topbar } from '../components/shared'
 import LayoutPage from '../components/shared/layout-page'
-import { VolumesService } from '../services'
+import { Event } from '../models'
+// import { mockEvent } from '../models/mocks'
+import { EventsService } from '../services/event.service'
 
 const HomePage: React.FC = (): JSX.Element => {
 
-  const [adventures] = VolumesService.useList({ q: 'adventure' })
-  const [kids] = VolumesService.useList({ q: 'kids' })
-  const [featured] = VolumesService.useList({ q: 'top' })
-  const [action] = VolumesService.useList({ q: 'action' })
+  const [events, setEvents] = useState<Event[]>([])
+
+  useEffect(() => {
+    EventsService.fetch().then(setEvents)
+  }, [])
 
   return (
     <>
@@ -17,10 +19,7 @@ const HomePage: React.FC = (): JSX.Element => {
       
       <LayoutPage>
         <>
-          <Shelf title="Aventura" volumes={adventures} />
-          <Shelf title="Infantil" volumes={kids} />
-          <Shelf title="Destaque" volumes={featured} isFeatured />
-          <Shelf title="Acao" volumes={action} />
+          {events[0]?.title}
         </>
       </LayoutPage>
     </>

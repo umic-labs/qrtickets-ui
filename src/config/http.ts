@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios'
 import qs from 'qs'
 
 let instance = axios.create({
-  baseURL: `https://www.googleapis.com/books/`,
+  baseURL: `http://localhost:1337/api`,
   paramsSerializer: function (params) {
     return qs.stringify(params, { indices: false })
   },
