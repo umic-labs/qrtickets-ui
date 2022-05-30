@@ -12,6 +12,40 @@ export const Subtitle = styled(H5)`
   }
 `
 
+export const ItemDescription = styled("div")`
+  margin-bottom: 32px;
+  color: ${colors.text};
+
+  font-family: "Roboto", "sans-serif";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  text-align: left;
+
+  > p,
+  > div {
+    padding-left: 40px;
+  }
+
+  small {
+    font-size: 0.9em;
+    color: ${colors.gray700};
+  }
+`;
+
+export const ImageHero = styled("img")`
+  @media (min-width: 576px) {
+    margin: 0 -20px;
+    width: calc(100% + 40px);
+  }
+
+  @media (min-width: 992px) {
+    margin: 0 -80px;
+    width: calc(100% + 160px);
+  }
+`;
+
 export const Markdown = styled(ReactMarkdown)`
   pre {
     padding: 0.5rem;
@@ -96,26 +130,5 @@ export const Markdown = styled(ReactMarkdown)`
   pre,
   code {
     background-color: #fafafa;
-  }
-`;
-
-export const ItemDescription = styled("div")`
-  margin-bottom: 32px;
-  color: ${colors.text};
-
-  font-family: 'Roboto', 'sans-serif';
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: 0.5px;
-  text-align: left;
-
-  > p, > div {
-    padding-left: 40px;
-  }
-
-  small {
-    font-size: 0.9em;
-    color: ${colors.gray700}
   }
 `;

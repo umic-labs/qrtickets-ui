@@ -2,7 +2,7 @@ import { LocationOn, EmojiEmotions } from "@mui/icons-material"
 import { useTranslation } from "react-i18next"
 import { Event } from "../../../models"
 import { H1 } from "../../shared"
-import { ItemDescription, Markdown, Subtitle } from "./styles"
+import { ImageHero, ItemDescription, Markdown, Subtitle } from "./styles"
 import EventIcon from '@mui/icons-material/Event';
 
 interface Props {
@@ -11,9 +11,12 @@ interface Props {
 
 export const EventInfo: React.FC<Props> = (props: Props): JSX.Element => {
   const { t } = useTranslation()
+  const apiUrl = process.env.REACT_APP_API_URL
 
   return (
     <>
+      <ImageHero src={`${apiUrl}${props.event?.thumbnail?.url}`} alt="" />
+
       <H1>{props.event?.title}</H1>
 
       <ItemDescription>

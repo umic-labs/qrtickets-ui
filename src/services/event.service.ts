@@ -32,5 +32,6 @@ function createOne(data: IData): Event {
     locationCoordinates: attributes['locationCoordinates'],
     locationTitle: attributes['locationTitle'],
     title: attributes['title'],
+    thumbnail: attributes?.thumbnail?.data?.attributes
   }
 }

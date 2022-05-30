@@ -2,11 +2,11 @@ import axios, { AxiosError, AxiosResponse } from 'axios'
 import qs from 'qs'
 
 let instance = axios.create({
-  baseURL: `http://localhost:1337/api`,
+  baseURL: process.env.REACT_APP_API_URL,
   paramsSerializer: function (params) {
-    return qs.stringify(params, { indices: false })
+    return qs.stringify(params, { indices: false });
   },
-})
+});
 
 function parseBody(response: AxiosResponse<any>) {
   if (response.status === 200 || response.status === 201) {
