@@ -1,11 +1,11 @@
-import styled from 'styled-components'
+import { styled } from '@mui/material/styles'
 
-export const Wrapper = styled.div`
-  padding: 30px 17px 20px;
+export const Wrapper = styled('div')`
+  padding: 0 20px 40px;
+  margin-top: 56px;
   box-sizing: border-box;
   left: 0;
   right: 0;
-  height: calc(100vh - 56px);
   overflow-x: clip;
 
   scrollbar-width: thin;

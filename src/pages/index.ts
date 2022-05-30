@@ -1,3 +1,4 @@
 import HomePage from './home.page'
+import EventPage from './event.page'
 
-export { HomePage }
+export { HomePage, EventPage }

@@ -1,12 +1,17 @@
 import React from 'react';
-import { GlobalStyle } from './components/shared';
-import { HomePage } from './pages';
+import { HomePage, EventPage } from './pages';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './components/shared/global-style.scss'
 
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <HomePage />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="event/:id" element={<EventPage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

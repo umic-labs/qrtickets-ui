@@ -3,7 +3,6 @@ import { EVENTS } from './endpoints'
 
 export const EventsApi = {
   find(params?: any) {
-
     return http.get(EVENTS, { params })
   },
 

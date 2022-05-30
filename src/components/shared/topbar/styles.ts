@@ -1,11 +1,8 @@
-import styled from 'styled-components'
+import { styled } from '@mui/material/styles'
+import Typography from '@mui/material/Typography';
 
-export const Nav = styled.nav`
-  background: #EFFAFF;
-  height: 56px;
-  box-sizing: border-box;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+export const NavTitle = styled(Typography)`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `

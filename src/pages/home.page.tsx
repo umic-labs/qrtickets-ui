@@ -6,7 +6,6 @@ import { Event } from '../models'
 import { EventsService } from '../services/event.service'
 
 const HomePage: React.FC = (): JSX.Element => {
-
   const [events, setEvents] = useState<Event[]>([])
 
   useEffect(() => {
@@ -15,7 +14,9 @@ const HomePage: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <Topbar />
+      <Topbar>
+        Home
+      </Topbar>
       
       <LayoutPage>
         <>

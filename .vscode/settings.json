@@ -5,5 +5,10 @@
   "editor.rulers": [{
     "column": 80,
     "color": "#4e5461"
-  }]
+  }
+],
+"i18n-ally.localesPaths": [
+  "src/config"
+],
+"i18n-ally.keystyle": "nested"
 }

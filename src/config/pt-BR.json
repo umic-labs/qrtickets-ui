@@ -1,0 +1,13 @@
+{
+  "Welcome to React": "seja bem vindo",
+  "event_info": {
+    "from_price_subtitle": "a partir de",
+    "sign_up_button": "inscrever-se",
+    "about_event_subtitle": "Sobre este evento",
+    "date_and_time_subtitle": "Data e tempo",
+    "location_subtitle": "Localização",
+    "go_to_map_subtitle": "Ver mapa",
+    "from": "de",
+    "to": "até"
+  }
+}
