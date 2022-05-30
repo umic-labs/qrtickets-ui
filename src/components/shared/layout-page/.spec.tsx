@@ -1,5 +1,5 @@
 import { shallow, ShallowWrapper } from 'enzyme'
-import LayoutPage from '.'
+import { LayoutPage } from '.'
 
 
 describe('LayoutPage', (): void => {

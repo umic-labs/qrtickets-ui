@@ -1,8 +1,8 @@
-import { ArrowBack, LocationOn, EmojiEmotions } from "@mui/icons-material"
+import { LocationOn, EmojiEmotions } from "@mui/icons-material"
 import { useTranslation } from "react-i18next"
 import { Event } from "../../../models"
 import { H1 } from "../../shared"
-import { ItemDescription, Subtitle } from "./styles"
+import { ItemDescription, Markdown, Subtitle } from "./styles"
 import EventIcon from '@mui/icons-material/Event';
 
 interface Props {
@@ -24,7 +24,7 @@ export const EventInfo: React.FC<Props> = (props: Props): JSX.Element => {
         </Subtitle>
 
         <p><small>{t('event_info.from')}</small> {props.event?.beginAt.toDateString()}</p>
-        
+
         <p><small>{t('event_info.to')}</small> {props.event?.endAt.toDateString()}</p>
 
         <p>21h00, horário de Brasília</p>
@@ -52,7 +52,9 @@ export const EventInfo: React.FC<Props> = (props: Props): JSX.Element => {
           <span>{t('event_info.about_event_subtitle')}</span>
         </Subtitle>
 
-        <p>{props.event?.description}</p>
+        <Markdown>
+          {props.event?.description || ''}
+        </Markdown>
       </ItemDescription>
 
       <ItemDescription>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Wrapper } from './styles'
+import { Wrapper, Content } from './styles'
 
 
 interface Props {
@@ -9,7 +9,9 @@ interface Props {
 const LayoutPage: React.FC<Props>  = (props: Props): JSX.Element => {
   return (
     <Wrapper>
-      {props.children}
+      <Content>
+        {props.children}
+      </Content>
     </Wrapper>
   )
 }

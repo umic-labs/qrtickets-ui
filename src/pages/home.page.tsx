@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Topbar } from '../components/shared'
-import LayoutPage from '../components/shared/layout-page'
+import { Topbar, LayoutPage } from '../components/shared'
 import { Event } from '../models'
 // import { mockEvent } from '../models/mocks'
 import { EventsService } from '../services/event.service'

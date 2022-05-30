@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles'
 import { colors } from '../../shared/colors';
 import { H5 } from "../../shared/h5";
+import ReactMarkdown from "react-markdown";
 
 export const Subtitle = styled(H5)`
   display: flex;
@@ -10,6 +11,93 @@ export const Subtitle = styled(H5)`
     margin-left: 16px;
   }
 `
+
+export const Markdown = styled(ReactMarkdown)`
+  pre {
+    padding: 0.5rem;
+    line-height: 1.25;
+    overflow-x: scroll;
+  }
+
+  a,
+  a:visited {
+    color: #3498db;
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 1.3rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 1.414rem 0 0.5rem;
+    font-weight: inherit;
+    line-height: 1.42;
+  }
+
+  h1 {
+    margin-top: 0;
+    font-size: 3.998rem;
+  }
+
+  h2 {
+    font-size: 2.827rem;
+  }
+
+  h3 {
+    font-size: 1.999rem;
+  }
+
+  h4 {
+    font-size: 1.414rem;
+  }
+
+  h5 {
+    font-size: 1.121rem;
+  }
+
+  h6 {
+    font-size: 0.88rem;
+  }
+
+  small {
+    font-size: 0.707em;
+  }
+
+  /* https://github.com/mrmrs/fluidity */
+
+  img,
+  canvas,
+  iframe,
+  video,
+  svg,
+  select,
+  textarea {
+    max-width: 100%;
+  }
+  
+  h1,
+  h2,
+  h3 {
+    border-bottom: 2px solid #fafafa;
+    margin-bottom: 1.15rem;
+    padding-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  blockquote {
+    border-left: 8px solid #fafafa;
+    padding: 1rem;
+  }
+
+  pre,
+  code {
+    background-color: #fafafa;
+  }
+`;
 
 export const ItemDescription = styled("div")`
   margin-bottom: 32px;
@@ -22,7 +110,7 @@ export const ItemDescription = styled("div")`
   letter-spacing: 0.5px;
   text-align: left;
 
-  p {
+  > p, > div {
     padding-left: 40px;
   }
 
