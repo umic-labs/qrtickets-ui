@@ -1,27 +1,11 @@
-<h1 align="center">📚 Awesome Bookshelf 📚</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000" />
-  <a href="https://github.com/leandrokanis/bookshelf-app" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
-  </a>
-  <a href="https://opensource.org/licenses/MIT" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-  </a>
-  <a href="https://twitter.com/leandrokanis" target="_blank">
-    <img alt="Twitter: leandrokanis" src="https://img.shields.io/twitter/follow/leandrokanis.svg?style=social" />
-  </a>
-</p>
+<h1 align="center">Tickets UMIC</h1>
 
-> Simple Bookshelf that uses Google Book Search API
-
-### 🏠 [Homepage](https://leandrokanis.github.io/bookshelf-app)
-
+> Gerenciamento de tickets para eventos por UMIC
 
 ## Install
 
-
 ### Requirements:
-- node >= 12
+- node >= 16
 - yarn >= 1.22
 
 
@@ -36,9 +20,6 @@ yarn install
 yarn run start
 ```
 
-
-You can use Docker as well
-
 ## Run tests
 
 ```sh
@@ -49,7 +30,7 @@ yarn run test
 
 The working branch is `dev`. Every contribuiton migth be submited by Pull Request into `dev` branch. 
 
-Once `dev` is stable, it can be submited to `master`, which deploys into production automatically.
+Once `dev` is stable, it can be submited to `main`, which deploys into production automatically.
 
 
 ## Git Commit Guidelines
@@ -87,24 +68,3 @@ Must be one of the following:
 * **test**: Adding missing or correcting existing tests
 * **chore**: Changes to the build process or auxiliary tools and libraries such as documentation
   generation
-
-## Author
-
-👤 **Leandro Alves**
-
-* Website: leandroalves.org
-* Twitter: [@leandrokanis](https://twitter.com/leandrokanis)
-* Github: [@leandrokanis](https://github.com/leandrokanis)
-* LinkedIn: [@leandrokanis](https://linkedin.com/in/leandrokanis)
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
-## 📝 License
-
-Copyright © 2021 [Leandro Alves](https://github.com/leandrokanis).<br />
-This project is [MIT](https://opensource.org/licenses/MIT) licensed.
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
