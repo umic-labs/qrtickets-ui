@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles'
 import { colors } from '../../shared/colors';
-import { H5 } from "../../shared/h5";
+import { H5 } from "../../shared";
 import ReactMarkdown from "react-markdown";
 
 export const Subtitle = styled(H5)`
@@ -35,7 +35,7 @@ export const ItemDescription = styled("div")`
 `;
 
 export const ImageHero = styled("img")`
-  @media (min-width: 576px) {
+  @media (max-width: 575px) {
     margin: 0 -20px;
     width: calc(100% + 40px);
   }

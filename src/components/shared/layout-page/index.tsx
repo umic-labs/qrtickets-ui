@@ -3,7 +3,7 @@ import { Wrapper, Content } from './styles'
 
 
 interface Props {
-  children: JSX.Element
+  children: JSX.Element | JSX.Element[]
 }
 
 const LayoutPage: React.FC<Props>  = (props: Props): JSX.Element => {

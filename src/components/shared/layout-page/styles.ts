@@ -2,6 +2,11 @@ import { styled } from '@mui/material/styles'
 import { colors } from '../colors';
 
 export const Content = styled("div")`
+  @media (max-width: 575px) {
+    max-width: 375px;
+    padding: 0 20px 40px;
+  }
+  
   // Small devices (landscape phones, 576px and up)
   @media (min-width: 576px) {
     max-width: 576px;
