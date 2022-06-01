@@ -1,14 +1,14 @@
-name: MasterDeployCI
+name: DevDeployCI
 on:
   push:
     branches:
-      - master
+      - dev
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [16.x]
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
@@ -23,7 +23,7 @@ jobs:
       run: |
         git config --global user.email ${{ secrets.EMAIL }} 
         git config --global user.name ${{ secrets.USERNAME }} 
-        git remote set-url origin https://${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/bookshelf-app.git 
+        git remote set-url origin https://${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/tickets-ui/.git 
         yarn deploy
     - name: Updating Domain
       run: echo "Update domain"
