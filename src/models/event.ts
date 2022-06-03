@@ -1,4 +1,5 @@
 import { Image } from "./image"
+import { Ticket } from "./ticket"
 
 export interface Event {
   beginAt: Date
@@ -9,5 +10,6 @@ export interface Event {
   locationCoordinates: string
   locationTitle: string
   title: string
+  tickets?: Ticket[]
   thumbnail?: Image
 }

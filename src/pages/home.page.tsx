@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Topbar, LayoutPage } from '../components/shared'
+import { Topbar, LayoutContainer } from '../components/shared'
 import { Event } from '../models'
-// import { mockEvent } from '../models/mocks'
-import { EventsService } from '../services/event.service'
+import { EventsService } from '../services'
 
 const HomePage: React.FC = (): JSX.Element => {
   const [events, setEvents] = useState<Event[]>([])
@@ -17,11 +16,11 @@ const HomePage: React.FC = (): JSX.Element => {
         Home
       </Topbar>
       
-      <LayoutPage>
+      <LayoutContainer>
         <>
           {events[0]?.title}
         </>
-      </LayoutPage>
+      </LayoutContainer>
     </>
   )
 }

@@ -9,6 +9,8 @@
     "go_to_map_subtitle": "Ver mapa",
     "from": "de",
     "to": "até",
-    "starts_at": "inicia às"
-  }
+    "starts_at": "inicia às",
+    "free": "Gratuito"
+  },
+  "ticket_item": "Quantidade"
 }
