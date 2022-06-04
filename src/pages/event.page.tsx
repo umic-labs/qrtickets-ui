@@ -5,8 +5,6 @@ import { Event } from '../models'
 import { EventsService } from '../services'
 import { EventInfo, TicketItem } from '../components/event'
 import { useTranslation } from 'react-i18next'
-import { AppBar, Toolbar } from '@mui/material'
-import { Box } from '@mui/system'
 
 const EventPage: React.FC = (): JSX.Element => {
   const [event, setEvent] = useState<Event>()
@@ -27,7 +25,10 @@ const EventPage: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <Layer isVisible={shouldBeVisible(Layers.EVENT)}>
+      <Layer
+        isVisible={shouldBeVisible(Layers.EVENT)}
+        isMain
+      >
         <LayoutContainer hasNavbar>
           <Topbar>{event?.title}</Topbar>
 
@@ -45,7 +46,10 @@ const EventPage: React.FC = (): JSX.Element => {
       </Layer>
 
 
-      <Layer isVisible={shouldBeVisible(Layers.TICKETS)}>
+      <Layer
+        isVisible={shouldBeVisible(Layers.TICKETS)}
+        onClose={() => setVisibleLayer(Layers.EVENT)}
+      >
         <LayoutContainer>
           <H2>Quantos ingressos?</H2>
 
