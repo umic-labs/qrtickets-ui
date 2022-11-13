@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Topbar, LayoutContainer, Layer, H1, H2 } from '../components/shared'
+import { Topbar, LayoutContainer, Layer, H2 } from '../components/shared'
 import { Event } from '../models'
 import { EventsService } from '../services'
 import { EventInfo, FooterPanel, TicketItem } from '../components/event'

@@ -2,7 +2,6 @@ import { IData } from "../config/types"
 import { Event } from "../models"
 import { EventsApi } from "../api"
 import {
-  TicketsService,
   createOne as createOneTicket
 } from "./tickets.service";
 
