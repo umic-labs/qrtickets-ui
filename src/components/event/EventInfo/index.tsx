@@ -9,7 +9,7 @@ interface Props {
   event?: Event
 }
 
-const EventInfo: React.FC<Props> = (props: Props): JSX.Element => {
+export const EventInfo: React.FC<Props> = (props: Props): JSX.Element => {
   const { t } = useTranslation()
   const apiUrl = process.env.REACT_APP_API_URL
 
@@ -74,5 +74,3 @@ const EventInfo: React.FC<Props> = (props: Props): JSX.Element => {
     </>
   ) 
 }
-
-export default EventInfo

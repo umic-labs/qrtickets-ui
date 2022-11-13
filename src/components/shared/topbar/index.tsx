@@ -1,11 +1,10 @@
 import React from 'react'
 
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import { ArrowBack, Menu } from '@mui/icons-material';
-import { NavTitle } from './styles';
+import { AppBarCustom, NavTitle } from './styles';
 
 
 interface Props  {
@@ -15,7 +14,7 @@ interface Props  {
 const Topbar: React.FC<Props> = (props: Props): JSX.Element => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+      <AppBarCustom position="absolute">
         <Toolbar>
           <IconButton
             size="large"
@@ -40,7 +39,7 @@ const Topbar: React.FC<Props> = (props: Props): JSX.Element => {
             <Menu />
           </IconButton>
         </Toolbar>
-      </AppBar>
+      </AppBarCustom>
     </Box>
   )
 }

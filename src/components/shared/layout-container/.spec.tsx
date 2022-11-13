@@ -1,13 +1,13 @@
 import { shallow, ShallowWrapper } from 'enzyme'
-import { LayoutPage } from '.'
+import { LayoutContainer } from '.'
 
 
-describe('LayoutPage', (): void => {
+describe('LayoutContainer', (): void => {
   let wrapper: ShallowWrapper
 
   beforeEach((): void => {
     wrapper = shallow(
-      <LayoutPage><></></LayoutPage>,
+      <LayoutContainer><></></LayoutContainer>,
     )
   })
 

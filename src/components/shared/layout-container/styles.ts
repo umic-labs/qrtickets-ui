@@ -1,5 +1,4 @@
 import { styled } from '@mui/material/styles'
-import { colors } from '../colors';
 
 export const Content = styled("div")`
   @media (max-width: 575px) {
@@ -33,12 +32,10 @@ export const Content = styled("div")`
   @media (min-width: 1400px) {
   }
 
-  margin-top: 56px;
   box-sizing: border-box;
   left: 0;
   right: 0;
   overflow-x: clip;
-  background-color: ${colors.white};
 
   scrollbar-width: thin;
   scrollbar-color: #cccccc transparent;
@@ -66,4 +63,8 @@ export const Content = styled("div")`
 export const Wrapper = styled('div')`
   display: flex;
   justify-content: center;
+
+  &.has-navbar {
+    padding-top: 56px;
+  }
 `

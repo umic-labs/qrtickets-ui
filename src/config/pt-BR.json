@@ -2,13 +2,18 @@
   "Welcome to React": "seja bem vindo",
   "event_info": {
     "from_price_subtitle": "a partir de",
-    "sign_up_button": "inscrever-se",
+    "sign_up_button": "Ingressos",
     "about_event_subtitle": "Sobre este evento",
     "date_and_time_subtitle": "Data e hora",
     "location_subtitle": "Localização",
     "go_to_map_subtitle": "Ver mapa",
     "from": "de",
     "to": "até",
-    "starts_at": "inicia às"
+    "starts_at": "inicia às",
+    "free": "Gratuito"
+  },
+  "ticket_item": "Quantidade",
+  "event_page": {
+    "tickets_subtitle": "Quantos ingressos?"
   }
 }

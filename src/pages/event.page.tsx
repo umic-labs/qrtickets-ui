@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Topbar, LayoutPage } from '../components/shared'
+import { Topbar, LayoutContainer, Layer, H1, H2 } from '../components/shared'
 import { Event } from '../models'
-import { EventsService } from '../services/event.service'
-import { EventInfo } from '../components/home'
+import { EventsService } from '../services'
+import { EventInfo, FooterPanel, TicketItem } from '../components/event'
 import { useTranslation } from 'react-i18next'
 
 const EventPage: React.FC = (): JSX.Element => {
   const [event, setEvent] = useState<Event>()
   const { id } = useParams()
   const { t } = useTranslation()
+  
+  enum Layers { EVENT = 0, TICKETS = 1 }
+
+  const [visibleLayer, setVisibleLayer] = useState<number>(Layers.EVENT)
+
+  const shouldBeVisible = (layer: number): boolean => {
+    return layer === visibleLayer
+  }
 
   useEffect(() => {
     EventsService.fetchOne({ id: Number(id) }).then(setEvent)
@@ -17,18 +25,36 @@ const EventPage: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <Topbar>{event?.title}</Topbar>
-      
-      <LayoutPage>
-        <EventInfo event={event} />
+      <Layer
+        isVisible={shouldBeVisible(Layers.EVENT)}
+        isMain
+      >
+        <LayoutContainer hasNavbar>
+          <Topbar>{event?.title}</Topbar>
 
-        <div>
-          <p>{t('event_info.from_price_subtitle')}</p>
-          <h2>R$ 99,90</h2>
+          <EventInfo event={event} />
 
-          <button>{t('event_info.sign_up_button')}</button>
-        </div>
-      </LayoutPage>
+          <FooterPanel
+            onSubmit={() => setVisibleLayer(Layers.TICKETS)}
+          />
+        </LayoutContainer>
+      </Layer>
+
+
+      <Layer
+        isVisible={shouldBeVisible(Layers.TICKETS)}
+        onClose={() => setVisibleLayer(Layers.EVENT)}
+      >
+        <LayoutContainer>
+          <H2>{t('event_page.tickets_subtitle')}</H2>
+
+          {
+            event?.tickets?.map((ticket) => (
+              <TicketItem ticket={ticket} key={ticket.id} />
+            ))
+          }
+        </LayoutContainer>
+      </Layer>
     </>
   )
 }
