@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Topbar, LayoutContainer, Layer, H1, H2 } from '../components/shared'
 import { Event } from '../models'
 import { EventsService } from '../services'
-import { EventInfo, TicketItem } from '../components/event'
+import { EventInfo, FooterPanel, TicketItem } from '../components/event'
 import { useTranslation } from 'react-i18next'
 
 const EventPage: React.FC = (): JSX.Element => {
@@ -34,14 +34,9 @@ const EventPage: React.FC = (): JSX.Element => {
 
           <EventInfo event={event} />
 
-          <div>
-            <p>{t('event_info.from_price_subtitle')}</p>
-            <h2>R$ 99,90</h2>
-
-            <button onClick={() => setVisibleLayer(Layers.TICKETS)}>
-              {t('event_info.sign_up_button')}
-            </button>
-          </div>
+          <FooterPanel
+            onSubmit={() => setVisibleLayer(Layers.TICKETS)}
+          />
         </LayoutContainer>
       </Layer>
 
@@ -51,7 +46,7 @@ const EventPage: React.FC = (): JSX.Element => {
         onClose={() => setVisibleLayer(Layers.EVENT)}
       >
         <LayoutContainer>
-          <H2>Quantos ingressos?</H2>
+          <H2>{t('event_page.tickets_subtitle')}</H2>
 
           {
             event?.tickets?.map((ticket) => (

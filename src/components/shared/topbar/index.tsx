@@ -14,7 +14,7 @@ interface Props  {
 const Topbar: React.FC<Props> = (props: Props): JSX.Element => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBarCustom position="fixed">
+      <AppBarCustom position="absolute">
         <Toolbar>
           <IconButton
             size="large"

@@ -59,22 +59,24 @@ const LayerStyle = styled('div')`
   min-height: 100vh;
   width: 100vw;
   overflow-y: scroll;
-  animation: 0.2s ease-out;
+  transition: 0.2s ease;
   visibility: hidden;
+  opacity: 0;
   
   &.is-visible {
+    opacity: 100%;
     visibility: visible;
-    animation-name: appear;
   }
-
+  
   &.is-hidden {
     opacity: 0%;
-    transform: scale(0.9);
+    transform: scale(0.93);
   }
-
+  
   &.is-main {
     background-color: ${colors.white};
     visibility: visible;
+    opacity: 100%;
   }
 `;
 
