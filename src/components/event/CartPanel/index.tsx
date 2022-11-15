@@ -1,8 +1,11 @@
+import { Button } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Item } from '../../../models'
+import { H3 } from '../../shared'
 import { composePriceString } from '../../shared/utils'
-
+import { InfoPrice, TotalItems, WrapperCart } from './styles'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 interface Props {
   items?: Item[]
   onContinue: () => void
@@ -15,14 +18,22 @@ export const CartPanel: React.FC<Props> = (props: Props): JSX.Element => {
   const totalPrice: number = composeTotalPrice(props.items || [])
 
   return (
-    <div>
-      <span>{totalAmount} itens</span>
-      <span>{composePriceString(totalPrice)}</span>
+    <WrapperCart>
+      <InfoPrice>
+        <H3>{composePriceString(totalPrice)}</H3>
+        <TotalItems>{totalAmount} itens</TotalItems>
+      </InfoPrice>
 
-      <button onClick={() => props.onContinue}>
-        {t('chart_panel.continue')}
-      </button>
-    </div>
+      <div>
+        <Button
+          onClick={() => props.onContinue}
+          variant="contained"
+        >
+          {t('chart_panel.continue')}
+          <ArrowForwardIosIcon sx={{ fontSize: 16, marginLeft: '8px' }} />
+        </Button>
+      </div>
+    </WrapperCart>
   )
 }
 

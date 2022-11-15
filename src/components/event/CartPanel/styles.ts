@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles'
 import { colors } from '../../shared/colors'
 
-export const FooterStyle = styled('div')`
+export const WrapperCart = styled('div')`
   background-color: ${colors.gray50};
   padding: 20px;
   position: fixed;
@@ -11,6 +11,16 @@ export const FooterStyle = styled('div')`
   width: 100vw;
   border-top: 1px solid ${colors.gray300};
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
-export const PriceStyle = styled('div')``
+export const InfoPrice = styled('div')`
+  text-align: left;
+`
+
+export const TotalItems = styled('span')`
+  font-size: 14px;
+`
+
