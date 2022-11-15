@@ -2,7 +2,7 @@ import React from 'react'
 import { Wrapper, Content } from './styles'
 
 interface Props {
-  children: any
+  children: React.ReactNode
   hasNavbar?: boolean
 }
 
