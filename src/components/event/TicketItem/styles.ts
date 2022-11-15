@@ -1,22 +1,22 @@
 import { styled } from '@mui/material/styles'
-import { colors } from '../../shared/colors';
-import { H5 } from "../../shared";
-import ReactMarkdown from "react-markdown";
+import { colors } from '../../shared/colors'
+import { H5 } from '../../shared'
+import ReactMarkdown from 'react-markdown'
 
 export const Subtitle = styled(H5)`
   display: flex;
   margin-bottom: 16px;
-  
-  >:last-child {
+
+  > :last-child {
     margin-left: 16px;
   }
 `
 
-export const ItemDescription = styled("div")`
+export const ItemDescription = styled('div')`
   margin-bottom: 32px;
   color: ${colors.text};
 
-  font-family: "Roboto", "sans-serif";
+  font-family: 'Roboto', 'sans-serif';
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -32,9 +32,9 @@ export const ItemDescription = styled("div")`
     font-size: 0.9em;
     color: ${colors.gray700};
   }
-`;
+`
 
-export const ImageHero = styled("img")`
+export const ImageHero = styled('img')`
   @media (max-width: 575px) {
     margin: 0 -20px;
     width: calc(100% + 40px);
@@ -44,7 +44,7 @@ export const ImageHero = styled("img")`
     margin: 0 -80px;
     width: calc(100% + 160px);
   }
-`;
+`
 
 export const Markdown = styled(ReactMarkdown)`
   pre {
@@ -112,7 +112,7 @@ export const Markdown = styled(ReactMarkdown)`
   textarea {
     max-width: 100%;
   }
-  
+
   h1,
   h2,
   h3 {
@@ -131,4 +131,4 @@ export const Markdown = styled(ReactMarkdown)`
   code {
     background-color: #fafafa;
   }
-`;
+`

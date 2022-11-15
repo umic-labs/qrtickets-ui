@@ -1,14 +1,14 @@
 import { styled } from '@mui/material/styles'
 import { colors } from './colors'
 
-const H5 = styled('h5')`
+const H3 = styled('h3')`
   color: ${colors.text};
   font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: 0.1px;
+  font-weight: 600;
+  font-size: 20px;
   text-align: left;
+  padding: 0;
+  margin: 0;
 `
 
-export default H5
+export default H3

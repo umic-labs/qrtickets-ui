@@ -1,8 +1,8 @@
-import { blues } from "./blues"
-import { grays } from "./grays"
-import { greens } from "./greens"
-import { reds } from "./reds"
-import { yellows } from "./yellows"
+import { blues } from './blues'
+import { grays } from './grays'
+import { greens } from './greens'
+import { reds } from './reds'
+import { yellows } from './yellows'
 
 const black = '#000000'
 const white = '#FFFFFF'

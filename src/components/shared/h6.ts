@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles'
 import { colors } from './colors'
 
 const H6 = styled('h6')`
-  font-family: "Roboto", 'sans-serif';
+  font-family: 'Roboto', 'sans-serif';
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
@@ -12,6 +12,6 @@ const H6 = styled('h6')`
   text-transform: uppercase;
 
   color: ${colors.text};
-`;
+`
 
 export default H6

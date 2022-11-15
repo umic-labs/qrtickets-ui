@@ -12,14 +12,10 @@ const HomePage: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <Topbar>
-        Home
-      </Topbar>
-      
+      <Topbar>Home</Topbar>
+
       <LayoutContainer>
-        <>
-          {events[0]?.title}
-        </>
+        <>{events[0]?.title}</>
       </LayoutContainer>
     </>
   )

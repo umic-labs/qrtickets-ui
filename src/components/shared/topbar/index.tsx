@@ -1,13 +1,12 @@
 import React from 'react'
 
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import { ArrowBack, Menu } from '@mui/icons-material';
-import { AppBarCustom, NavTitle } from './styles';
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
+import { ArrowBack, Menu } from '@mui/icons-material'
+import { AppBarCustom, NavTitle } from './styles'
 
-
-interface Props  {
+interface Props {
   children?: React.ReactNode
 }
 
@@ -26,9 +25,7 @@ const Topbar: React.FC<Props> = (props: Props): JSX.Element => {
             <ArrowBack />
           </IconButton>
 
-          <NavTitle variant="h6">
-            {props.children}
-          </NavTitle>
+          <NavTitle variant="h6">{props.children}</NavTitle>
 
           <IconButton
             size="large"

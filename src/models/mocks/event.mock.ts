@@ -11,6 +11,6 @@ export const mockEvent = (): Event => {
     locationCoordinates: `${faker.address.latitude()}, ${faker.address.longitude()}`,
     locationTitle: faker.company.companyName(),
     title: faker.lorem.sentence(),
-    tickets: []
+    tickets: [],
   }
 }
