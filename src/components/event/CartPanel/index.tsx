@@ -1,7 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Item } from '../../../models'
-import { FooterStyle, PriceStyle } from './styles'
 
 interface Props {
   items?: Item[]

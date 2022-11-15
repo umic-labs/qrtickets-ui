@@ -1,10 +1,11 @@
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Ticket } from '../../../models'
 import { FooterStyle, PriceStyle } from './styles'
 
 interface Props {
   tickets?: Ticket[]
-  onSubmit: Function
+  onSubmit: () => void
 }
 
 export const FooterPanel: React.FC<Props> = (props: Props): JSX.Element => {

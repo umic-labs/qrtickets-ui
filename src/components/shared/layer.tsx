@@ -1,3 +1,4 @@
+import React from 'react'
 import { CloseOutlined } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 import { styled } from '@mui/material/styles'
@@ -7,7 +8,7 @@ interface Props {
   children: any
   isVisible: boolean
   isMain?: boolean
-  onClose?: Function
+  onClose?: () => void
 }
 
 const Layer: React.FC<Props> = (props: Props): JSX.Element => {

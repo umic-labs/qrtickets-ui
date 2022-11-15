@@ -19,7 +19,7 @@ export const TicketItem: React.FC<Props> = (props: Props): JSX.Element => {
   useEffect(() => {
     const selecteItem: Item = { ticket: props.ticket, amount }
     props.onSelect(selecteItem)
-  }, [amount, props])
+  }, [amount])
 
   return (
     <>

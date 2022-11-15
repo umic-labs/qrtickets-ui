@@ -30,12 +30,16 @@ const EventPage: React.FC = (): JSX.Element => {
   }
 
   const handleSelect = (item: Item): void => {
-    // setSelectedItems([item])
+    setSelectedItems([item])
   }
 
   useEffect(() => {
     EventsService.fetchOne({ id: Number(id) }).then(setEvent)
   }, [id])
+
+  useEffect(() => {
+    console.log({ selectedItems })
+  }, [selectedItems])
 
   return (
     <Wrapper>

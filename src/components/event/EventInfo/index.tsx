@@ -1,3 +1,4 @@
+import React from 'react'
 import { LocationOn, EmojiEmotions } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
 import { Event } from '../../../models'

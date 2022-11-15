@@ -41,7 +41,8 @@
   },
   "homepage": ".",
   "eslintConfig": {
-    "extends": []
+    "extends": [
+    ]
   },
   "browserslist": {
     "production": [

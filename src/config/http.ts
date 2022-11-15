@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import qs from 'qs'
 
-let instance = axios.create({
+const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   paramsSerializer: function (params) {
     return qs.stringify(params, { indices: false })
