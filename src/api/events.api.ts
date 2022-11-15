@@ -3,7 +3,7 @@ import urlcat from 'urlcat'
 import { EVENTS_URL, EVENTS_FIND_ONE_URL } from './endpoints'
 
 export const EventsApi = {
-  find(params?: any) {
+  find(params?: unknown) {
     return http.get(EVENTS_URL, { params })
   },
 

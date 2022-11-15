@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles'
 import { colors } from './colors'
 
 interface Props {
-  children: any
+  children: React.ReactNode
   isVisible: boolean
   isMain?: boolean
   onClose?: () => void

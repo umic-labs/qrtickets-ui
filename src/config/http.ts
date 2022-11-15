@@ -8,7 +8,7 @@ const instance = axios.create({
   },
 })
 
-function parseBody(response: AxiosResponse<any>) {
+function parseBody(response: AxiosResponse) {
   if (response.status === 200 || response.status === 201) {
     return response
   } else {
