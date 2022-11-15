@@ -4,7 +4,7 @@ import { H5 } from '../../shared'
 import { Item, Ticket } from '../../../models'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import { useEffect, useState } from 'react'
-import i18n from '../../../config/i18n'
+import { composePriceString } from '../../shared/utils'
 
 interface Props {
   ticket: Ticket
@@ -40,7 +40,7 @@ export const TicketItem: React.FC<Props> = (props: Props): JSX.Element => {
             label={t('ticket_item')}
             onChange={(e) => setAmount(Number(e.target.value))}
           >
-            {new Array(10).fill(null).map((_value, i) => (
+            {new Array(21).fill(null).map((_value, i) => (
               <MenuItem value={i} key={i}>
                 {i}
               </MenuItem>
@@ -50,12 +50,4 @@ export const TicketItem: React.FC<Props> = (props: Props): JSX.Element => {
       </div>
     </>
   )
-}
-
-const composePriceString = (price?: number): string => {
-  if (!price) return i18n.t('event_info.free')
-  return (price / 100).toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  })
 }

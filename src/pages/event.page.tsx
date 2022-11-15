@@ -10,7 +10,6 @@ import {
   TicketItem,
 } from '../components/event'
 import { useTranslation } from 'react-i18next'
-import { styled } from '@mui/material/styles'
 
 const EventPage: React.FC = (): JSX.Element => {
   const [event, setEvent] = useState<Event>()
@@ -30,19 +29,17 @@ const EventPage: React.FC = (): JSX.Element => {
   }
 
   const handleSelect = (item: Item): void => {
-    setSelectedItems([item])
+    const nextSelectedItems = composeSelectedItems(selectedItems, item)
+
+    setSelectedItems(nextSelectedItems)
   }
 
   useEffect(() => {
     EventsService.fetchOne({ id: Number(id) }).then(setEvent)
   }, [id])
 
-  useEffect(() => {
-    console.log({ selectedItems })
-  }, [selectedItems])
-
   return (
-    <Wrapper>
+    <>
       <Layer isVisible={shouldBeVisible(Layers.EVENT)} isMain>
         <LayoutContainer hasNavbar>
           <Topbar>{event?.title}</Topbar>
@@ -71,10 +68,22 @@ const EventPage: React.FC = (): JSX.Element => {
 
         <CartPanel items={selectedItems} onContinue={console.log} />
       </Layer>
-    </Wrapper>
+    </>
   )
 }
 
 export default EventPage
 
-export const Wrapper = styled('div')``
+function composeSelectedItems(selectedItems: Item[], item: Item) {
+  const offSelectedItems = selectedItems.filter(prevSelectedItem => {
+    return prevSelectedItem.ticket.id !== item.ticket.id
+  })
+
+  const nextSelectedItems = [
+    ...offSelectedItems,
+    ...(item.amount ? [item] : []),
+  ]
+
+  return nextSelectedItems
+}
+
