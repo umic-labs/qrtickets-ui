@@ -1,11 +1,13 @@
 import { styled } from '@mui/material/styles'
 
-export const Content = styled("div")`
+export const Content = styled('div')`
+  width: 100%;
+
   @media (max-width: 575px) {
     max-width: 375px;
     padding: 0 20px 40px;
   }
-  
+
   // Small devices (landscape phones, 576px and up)
   @media (min-width: 576px) {
     max-width: 576px;
@@ -58,7 +60,7 @@ export const Content = styled("div")`
       background-color: #cccccc;
     }
   }
-`;
+`
 
 export const Wrapper = styled('div')`
   display: flex;

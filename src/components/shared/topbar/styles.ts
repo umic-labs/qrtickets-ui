@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles'
-import Typography from '@mui/material/Typography';
-import AppBar from '@mui/material/AppBar';
+import Typography from '@mui/material/Typography'
+import AppBar from '@mui/material/AppBar'
 
 export const NavTitle = styled(Typography)`
   text-overflow: ellipsis;

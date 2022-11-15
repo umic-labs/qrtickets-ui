@@ -15,5 +15,8 @@
   "ticket_item": "Quantidade",
   "event_page": {
     "tickets_subtitle": "Quantos ingressos?"
+  },
+  "chart_panel": {
+    "continue": "Continuar"
   }
 }

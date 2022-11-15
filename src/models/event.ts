@@ -1,5 +1,5 @@
-import { Image } from "./image"
-import { Ticket } from "./ticket"
+import { Image } from './image'
+import { Ticket } from './ticket'
 
 export interface Event {
   beginAt: Date

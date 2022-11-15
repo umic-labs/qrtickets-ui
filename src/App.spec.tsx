@@ -1,14 +1,11 @@
-import App from './App';
+import App from './App'
 import { shallow, ShallowWrapper } from 'enzyme'
-
 
 describe('App', (): void => {
   let wrapper: ShallowWrapper
 
   beforeEach((): void => {
-    wrapper = shallow(
-      <App />,
-    )
+    wrapper = shallow(<App />)
   })
 
   it('renders component', (): void => {
