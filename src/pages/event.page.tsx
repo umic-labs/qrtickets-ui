@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Topbar, LayoutContainer, Layer, H2 } from '../components/shared'
 import { Attendee, Event, Item, Ticket } from '../models'
-import { EventsService } from '../services'
+import { EventsService, PurchasesService } from '../services'
 import {
   CartPanel,
   EventInfo,
@@ -11,21 +11,19 @@ import {
   TicketItem,
 } from '../components/event'
 import { useTranslation } from 'react-i18next'
+import { FormControl, TextField } from '@mui/material'
 
 const EventPage: React.FC = (): JSX.Element => {
-  const [event, setEvent] = useState<Event>()
-  const [selectedItems, setSelectedItems] = useState<Item[]>([])
   const [attendees, setAttendees] = useState<Attendee[]>([])
+  const [cpf, setCpf] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [event, setEvent] = useState<Event>()
+  const [name, setName] = useState<string>('')
+  const [selectedItems, setSelectedItems] = useState<Item[]>([])
+  const [visibleLayer, setVisibleLayer] = useState<number>(Layers.EVENT)
+
   const { id } = useParams()
   const { t } = useTranslation()
-
-  enum Layers {
-    EVENT = 0,
-    TICKETS = 1,
-    PURCHASE = 2,
-  }
-
-  const [visibleLayer, setVisibleLayer] = useState<number>(Layers.EVENT)
 
   const shouldBeVisible = (layer: number): boolean => {
     return layer === visibleLayer
@@ -33,7 +31,6 @@ const EventPage: React.FC = (): JSX.Element => {
 
   const handleSelect = (item: Item): void => {
     const nextSelectedItems = composeSelectedItems(selectedItems, item)
-
     setSelectedItems(nextSelectedItems)
   }
 
@@ -46,12 +43,16 @@ const EventPage: React.FC = (): JSX.Element => {
     setAttendees(nextAttendees)
   }
 
+  const handleSubmit = (): void => {
+    PurchasesService.create({ name, email, cpf, attendees })
+  }
+
   useEffect(() => {
     EventsService.fetchOne({ id: Number(id) }).then(setEvent)
   }, [id])
 
   useEffect(() => {
-    console.log({ attendees})
+    console.log({ attendees })
   }, [attendees])
 
   return (
@@ -84,14 +85,12 @@ const EventPage: React.FC = (): JSX.Element => {
 
         <CartPanel
           items={selectedItems}
-          onContinue={() => setVisibleLayer(Layers.PURCHASE)}
+          onContinue={() => setVisibleLayer(Layers.ATTENDEES)}
         />
       </Layer>
 
-
-
       <Layer
-        isVisible={shouldBeVisible(Layers.PURCHASE)}
+        isVisible={shouldBeVisible(Layers.ATTENDEES)}
         onClose={() => setVisibleLayer(Layers.EVENT)}
       >
         <LayoutContainer>
@@ -109,13 +108,62 @@ const EventPage: React.FC = (): JSX.Element => {
           ))}
         </LayoutContainer>
 
-        <CartPanel items={selectedItems} onContinue={console.log} />
+        <CartPanel
+          items={selectedItems}
+          onContinue={() => setVisibleLayer(Layers.PURCHASE)}
+        />
+      </Layer>
+
+      <Layer
+        isVisible={shouldBeVisible(Layers.PURCHASE)}
+        onClose={() => setVisibleLayer(Layers.EVENT)}
+      >
+        <LayoutContainer>
+          <H2>Informações de pagamento</H2>
+
+          <FormControl fullWidth>
+            <TextField
+              label="Nome"
+              variant="outlined"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              sx={{ marginBottom: '8px' }}
+            />
+
+            <TextField
+              id="outlined-basic"
+              label="Email"
+              variant="outlined"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              sx={{ marginBottom: '8px ' }}
+            />
+
+            <TextField
+              id="outlined-basic"
+              label="CPF"
+              variant="outlined"
+              value={cpf}
+              onChange={(e) => setCpf(e.target.value)}
+              sx={{ marginBottom: '8px ' }}
+            />
+          </FormControl>
+        </LayoutContainer>
+
+        <CartPanel items={selectedItems} onContinue={handleSubmit} />
       </Layer>
     </>
   )
 }
 
 export default EventPage
+
+enum Layers {
+  EVENT = 0,
+  TICKETS = 1,
+  ATTENDEES = 2,
+  PURCHASE = 3,
+}
 
 function composeSelectedItems(selectedItems: Item[], item: Item) {
   const offSelectedItems = selectedItems.filter(prevSelectedItem => {

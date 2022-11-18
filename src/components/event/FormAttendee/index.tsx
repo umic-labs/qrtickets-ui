@@ -24,7 +24,7 @@ export const FormAttendee: React.FC<Props> = (props: Props): JSX.Element => {
 
   return (
     <>
-      <H3 style={{ margin: '16px 0'}}>{props.id} - {props.title}</H3>
+      <H3 style={{ margin: '16px 0'}}>{props.title}</H3>
 
       <FormControl fullWidth>
         <TextField
