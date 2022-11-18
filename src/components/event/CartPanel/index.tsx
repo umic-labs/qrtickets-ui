@@ -26,7 +26,7 @@ export const CartPanel: React.FC<Props> = (props: Props): JSX.Element => {
 
       <div>
         <Button
-          onClick={() => props.onContinue}
+          onClick={props.onContinue}
           variant="contained"
         >
           {t('chart_panel.continue')}

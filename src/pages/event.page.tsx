@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Topbar, LayoutContainer, Layer, H2 } from '../components/shared'
-import { Event, Item } from '../models'
+import { Attendee, Event, Item, Ticket } from '../models'
 import { EventsService } from '../services'
 import {
   CartPanel,
   EventInfo,
   FooterPanel,
+  FormAttendee,
   TicketItem,
 } from '../components/event'
 import { useTranslation } from 'react-i18next'
@@ -14,12 +15,14 @@ import { useTranslation } from 'react-i18next'
 const EventPage: React.FC = (): JSX.Element => {
   const [event, setEvent] = useState<Event>()
   const [selectedItems, setSelectedItems] = useState<Item[]>([])
+  const [attendees, setAttendees] = useState<Attendee[]>([])
   const { id } = useParams()
   const { t } = useTranslation()
 
   enum Layers {
     EVENT = 0,
     TICKETS = 1,
+    PURCHASE = 2,
   }
 
   const [visibleLayer, setVisibleLayer] = useState<number>(Layers.EVENT)
@@ -34,9 +37,22 @@ const EventPage: React.FC = (): JSX.Element => {
     setSelectedItems(nextSelectedItems)
   }
 
+  const handleChange = (attendee: Attendee): void => {
+    const offsetAttendees = attendees.filter((prevAttendee) => (
+      attendee.id !== prevAttendee.id
+    ))
+    const nextAttendees = [...offsetAttendees, attendee]
+
+    setAttendees(nextAttendees)
+  }
+
   useEffect(() => {
     EventsService.fetchOne({ id: Number(id) }).then(setEvent)
   }, [id])
+
+  useEffect(() => {
+    console.log({ attendees})
+  }, [attendees])
 
   return (
     <>
@@ -66,6 +82,33 @@ const EventPage: React.FC = (): JSX.Element => {
           ))}
         </LayoutContainer>
 
+        <CartPanel
+          items={selectedItems}
+          onContinue={() => setVisibleLayer(Layers.PURCHASE)}
+        />
+      </Layer>
+
+
+
+      <Layer
+        isVisible={shouldBeVisible(Layers.PURCHASE)}
+        onClose={() => setVisibleLayer(Layers.EVENT)}
+      >
+        <LayoutContainer>
+          <H2>Quem vai participar?</H2>
+
+          {selectedItems.map((item) => (
+            Array(item.amount).fill(item.ticket).map((ticket, i) => (
+              <FormAttendee
+                id={composeId(ticket, i)}
+                onChange={handleChange}
+                title={ticket.title}
+                key={ticket.title}
+              />
+            ))
+          ))}
+        </LayoutContainer>
+
         <CartPanel items={selectedItems} onContinue={console.log} />
       </Layer>
     </>
@@ -87,3 +130,6 @@ function composeSelectedItems(selectedItems: Item[], item: Item) {
   return nextSelectedItems
 }
 
+function composeId(ticket: Ticket, index: number): string {
+  return `${ticket.id}-${index+1}`
+}
