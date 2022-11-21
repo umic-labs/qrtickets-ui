@@ -11,7 +11,8 @@ import {
   TicketItem,
 } from '../components/event'
 import { useTranslation } from 'react-i18next'
-import { FormControl, TextField } from '@mui/material'
+import { Button, FormControl, TextField } from '@mui/material'
+import { Purchase } from '../models/purchase'
 
 const EventPage: React.FC = (): JSX.Element => {
   const [attendees, setAttendees] = useState<Attendee[]>([])
@@ -21,6 +22,7 @@ const EventPage: React.FC = (): JSX.Element => {
   const [name, setName] = useState<string>('')
   const [selectedItems, setSelectedItems] = useState<Item[]>([])
   const [visibleLayer, setVisibleLayer] = useState<number>(Layers.EVENT)
+  const [purchase, setPurchase] = useState<Purchase>()
 
   const { id } = useParams()
   const { t } = useTranslation()
@@ -36,24 +38,26 @@ const EventPage: React.FC = (): JSX.Element => {
 
   const handleChange = (attendee: Attendee): void => {
     const offsetAttendees = attendees.filter((prevAttendee) => (
-      attendee.id !== prevAttendee.id
+      attendee.uid !== prevAttendee.uid
     ))
     const nextAttendees = [...offsetAttendees, attendee]
 
     setAttendees(nextAttendees)
   }
 
-  const handleSubmit = (): void => {
-    PurchasesService.create({ name, email, cpf, attendees })
+  const handleSubmit = (total: number): void => {
+    PurchasesService.create(
+      { name, email, cpf, attendees, total, eventId: Number(id) },
+    ).then((purchase) => {
+      console.log({ purchase })
+      setPurchase(purchase)
+      setVisibleLayer(Layers.SUCCESS)
+    })
   }
 
   useEffect(() => {
     EventsService.fetchOne({ id: Number(id) }).then(setEvent)
   }, [id])
-
-  useEffect(() => {
-    console.log({ attendees })
-  }, [attendees])
 
   return (
     <>
@@ -99,10 +103,10 @@ const EventPage: React.FC = (): JSX.Element => {
           {selectedItems.map((item) => (
             Array(item.amount).fill(item.ticket).map((ticket, i) => (
               <FormAttendee
-                id={composeId(ticket, i)}
+                uid={composeId(ticket, i)}
                 onChange={handleChange}
-                title={ticket.title}
                 key={ticket.title}
+                ticket={ticket}
               />
             ))
           ))}
@@ -152,6 +156,20 @@ const EventPage: React.FC = (): JSX.Element => {
 
         <CartPanel items={selectedItems} onContinue={handleSubmit} />
       </Layer>
+
+      <Layer
+        isVisible={shouldBeVisible(Layers.SUCCESS)}
+        onClose={() => setVisibleLayer(Layers.EVENT)}
+      >
+        <LayoutContainer>
+          <H2>Inscrição realizada</H2>
+
+          <Button onClick={() => setVisibleLayer(Layers.TICKETS)}>
+            Fechar
+          </Button>
+
+        </LayoutContainer>
+      </Layer>
     </>
   )
 }
@@ -163,6 +181,7 @@ enum Layers {
   TICKETS = 1,
   ATTENDEES = 2,
   PURCHASE = 3,
+  SUCCESS = 4,
 }
 
 function composeSelectedItems(selectedItems: Item[], item: Item) {

@@ -1,42 +1,70 @@
-import { Attendee, Event } from '../models'
+import { Attendee, Purchase } from '../models'
 import { PurchasesApi } from '../api/purchases.api'
+import { IData } from '../config/types'
+
+interface PropsCreate {
+  attendees: Attendee[]
+  cpf: string
+  email: string
+  eventId: number
+  name: string
+  total: number
+}
 
 export const PurchasesService = {
-  async create({ name, email, cpf, attendees }: {
-    name: string
-    email: string
-    cpf: string
-    attendees: Attendee[]
-  }): Promise<Event[]> {
-
-    const payload = composePayload({ name, email, cpf, attendees })
+  async create({
+    attendees,
+    cpf,
+    email,
+    eventId,
+    name,
+    total,
+  }: PropsCreate): Promise<Purchase> {
+    const payload = composePayload(
+      { name, email, cpf, attendees, total, eventId },
+    )
 
     const purchase = await PurchasesApi.create(payload).then((response) => {
-      console.log(response.data)
-      return response.data
+      return composePurchase(response.data.data)
     })
 
     return purchase
   },
 }
 
-
-const composePayload = ({ name, email, cpf, attendees }: {
-    name: string
-    email: string
-    cpf: string
-    attendees: Attendee[]
-  }) => {
+const composePayload = ({
+  attendees,
+  cpf,
+  email,
+  eventId,
+  name,
+  total,
+}: PropsCreate) => {
   return {
-    'data': {
-      name,
-      email,
+    data: {
       cpf,
-      'event': '1',
-      'total': '150000',
-      'Attendees': {
-        'data': attendees,
+      email,
+      event: eventId,
+      name,
+      total,
+      Attendees: {
+        data: attendees,
       },
     },
+  }
+}
+
+const composePurchase = (data: IData): Purchase => {
+  const { attributes } = data
+
+  console.log({ data })
+
+  return {
+    id: data.id,
+    email: attributes['email'],
+    total: attributes['total'],
+    name: attributes['name'],
+    cpf: attributes['cpf'],
+    // attendees: Attendee[]
   }
 }

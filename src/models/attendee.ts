@@ -1,6 +1,8 @@
 export interface Attendee {
-  email: string
+  church: string
+  city: string
+  uid: string
   name: string
   phone: string
-  id: string
+  ticket: string
 }
