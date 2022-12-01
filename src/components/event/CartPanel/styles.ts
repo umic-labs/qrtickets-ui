@@ -14,6 +14,7 @@ export const WrapperCart = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 20;
 `
 
 export const InfoPrice = styled('div')`
