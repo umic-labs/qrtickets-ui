@@ -1,3 +1,4 @@
+import { Button } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Ticket } from '../../../models'
@@ -16,12 +17,12 @@ export const FooterPanel: React.FC<Props> = (props: Props): JSX.Element => {
       <PriceStyle>
         <p>{t('event_info.from_price_subtitle')}</p>
 
-        <h2>R$ 99,90</h2>
+        <h2>R$ 300,00</h2>
       </PriceStyle>
 
-      <button onClick={() => props.onSubmit()}>
+      <Button onClick={() => props.onSubmit()}>
         {t('event_info.sign_up_button')}
-      </button>
+      </Button>
     </FooterStyle>
   )
 }
