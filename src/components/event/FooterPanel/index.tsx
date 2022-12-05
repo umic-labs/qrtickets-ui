@@ -20,7 +20,7 @@ export const FooterPanel: React.FC<Props> = (props: Props): JSX.Element => {
         <h2>R$ 300,00</h2>
       </PriceStyle>
 
-      <Button onClick={() => props.onSubmit()}>
+      <Button onClick={() => props.onSubmit()} variant='contained'>
         {t('event_info.sign_up_button')}
       </Button>
     </FooterStyle>
