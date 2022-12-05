@@ -30,6 +30,15 @@ export const PurchasesService = {
 
     return purchase
   },
+
+  async findByPreference(preferenceId: string): Promise<Purchase> {
+    const purchase = await PurchasesApi.findByPreference({ preferenceId })
+      .then((response) => {
+        return composePurchase(response?.data.data)
+      })
+
+    return purchase
+  },
 }
 
 const composePayload = ({
@@ -65,6 +74,9 @@ const composePurchase = (data: IData): Purchase => {
     total: attributes['total'],
     name: attributes['name'],
     cpf: attributes['cpf'],
+    status: attributes['status'],
+    preference: attributes['preference'],
+    preferenceId: attributes['preferenceId'],
     // attendees: Attendee[]
   }
 }

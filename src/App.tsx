@@ -1,5 +1,5 @@
 import React from 'react'
-import { HomePage, EventPage } from './pages'
+import { HomePage, EventPage, PurchasePage, FeedbackPaymentPage } from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './components/shared/global-style.scss'
 import { Wrapper } from './components/shared'
@@ -11,6 +11,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="event/:id" element={<EventPage />} />
+          <Route path="purchase/:preferenceId" element={<PurchasePage />} />
+          <Route path="feedback-payment" element={<FeedbackPaymentPage />} />
         </Routes>
       </BrowserRouter>
     </Wrapper>

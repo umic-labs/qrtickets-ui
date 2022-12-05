@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { Button, FormControl, TextField } from '@mui/material'
 import { Purchase } from '../models/purchase'
 
+
 const EventPage: React.FC = (): JSX.Element => {
   const [attendees, setAttendees] = useState<Attendee[]>([])
   const [cpf, setCpf] = useState<string>('')
@@ -49,9 +50,8 @@ const EventPage: React.FC = (): JSX.Element => {
     PurchasesService.create(
       { name, email, cpf, attendees, total, eventId: Number(id) },
     ).then((purchase) => {
-      console.log({ purchase })
       setPurchase(purchase)
-      setVisibleLayer(Layers.SUCCESS)
+      window.location.replace(purchase.preference.init_point)
     })
   }
 
@@ -89,7 +89,7 @@ const EventPage: React.FC = (): JSX.Element => {
 
         <CartPanel
           items={selectedItems}
-          onContinue={() => setVisibleLayer(Layers.ATTENDEES)}
+          onContinue={() => setVisibleLayer(Layers.PURCHASE)}
         />
       </Layer>
 
