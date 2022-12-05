@@ -2,24 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { LayoutContainer, Layer, H2, H6, H5, H3 } from '../components/shared'
 import { PurchasesService } from '../services'
-import { useTranslation } from 'react-i18next'
 import { Button } from '@mui/material'
 import { Purchase } from '../models/purchase'
 
 
 const PurchasePage: React.FC = (): JSX.Element => {
-  const [visibleLayer, setVisibleLayer] = useState<number>(0)
+  const [visibleLayer, _setVisibleLayer] = useState<number>(0)
   const [purchase, setPurchase] = useState<Purchase>()
 
   const { preferenceId } = useParams()
-  const { t } = useTranslation()
 
   const shouldBeVisible = (layer: number): boolean => {
     return layer === visibleLayer
   }
 
 
-  const handleSubmit = (): void => {
+  const _handleSubmit = (): void => {
     console.log('TODO: create attendees')
   }
 

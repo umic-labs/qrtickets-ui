@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Divider, FormControl, TextField } from '@mui/material'
 import { useState } from 'react'
 import { H3 } from '../../shared'
@@ -12,7 +11,6 @@ interface Props {
 }
 
 export const FormAttendee: React.FC<Props> = (props: Props): JSX.Element => {
-  const { t } = useTranslation()
   const [city, setCity] = useState<string>('')
   const [church, setChurch] = useState<string>('')
   const [name, setName] = useState<string>('')

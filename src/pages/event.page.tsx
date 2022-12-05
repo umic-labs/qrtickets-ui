@@ -12,7 +12,6 @@ import {
 } from '../components/event'
 import { useTranslation } from 'react-i18next'
 import { Button, FormControl, TextField } from '@mui/material'
-import { Purchase } from '../models/purchase'
 
 
 const EventPage: React.FC = (): JSX.Element => {
@@ -23,7 +22,6 @@ const EventPage: React.FC = (): JSX.Element => {
   const [name, setName] = useState<string>('')
   const [selectedItems, setSelectedItems] = useState<Item[]>([])
   const [visibleLayer, setVisibleLayer] = useState<number>(Layers.EVENT)
-  const [purchase, setPurchase] = useState<Purchase>()
 
   const { id } = useParams()
   const { t } = useTranslation()
@@ -50,7 +48,6 @@ const EventPage: React.FC = (): JSX.Element => {
     PurchasesService.create(
       { name, email, cpf, attendees, total, eventId: Number(id) },
     ).then((purchase) => {
-      setPurchase(purchase)
       window.location.replace(purchase.preference.init_point)
     })
   }
