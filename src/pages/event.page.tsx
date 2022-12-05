@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { Topbar, LayoutContainer, Layer, H2 } from '../components/shared'
 import { Attendee, Event, Item, Ticket } from '../models'
 import { EventsService, PurchasesService } from '../services'
@@ -23,7 +22,7 @@ const EventPage: React.FC = (): JSX.Element => {
   const [selectedItems, setSelectedItems] = useState<Item[]>([])
   const [visibleLayer, setVisibleLayer] = useState<number>(Layers.EVENT)
 
-  const { id } = useParams()
+  const id = 1
   const { t } = useTranslation()
 
   const shouldBeVisible = (layer: number): boolean => {
