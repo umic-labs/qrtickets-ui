@@ -8,7 +8,7 @@ export interface Purchase {
   name: string
   cpf: string
   attendees?: Attendee[]
-  status: 'pending' | 'paid'
+  status: 'pending' | 'approved'
   preference: Preference
   preferenceId: string
 }

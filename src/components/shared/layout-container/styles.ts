@@ -5,7 +5,7 @@ export const Content = styled('div')`
 
   @media (max-width: 575px) {
     max-width: 375px;
-    padding: 0 20px 40px;
+    padding: 0 20px 140px;
   }
 
   // Small devices (landscape phones, 576px and up)

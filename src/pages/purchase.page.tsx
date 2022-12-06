@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { LayoutContainer, Layer, H2, H6, H5, H3 } from '../components/shared'
 import { PurchasesService } from '../services'
-import { Button } from '@mui/material'
 import { Purchase } from '../models/purchase'
 
 
 const PurchasePage: React.FC = (): JSX.Element => {
-  const [visibleLayer, _setVisibleLayer] = useState<number>(0)
+  const [visibleLayer, setVisibleLayer] = useState<number>(0)
   const [purchase, setPurchase] = useState<Purchase>()
 
   const { preferenceId } = useParams()
@@ -15,7 +14,6 @@ const PurchasePage: React.FC = (): JSX.Element => {
   const shouldBeVisible = (layer: number): boolean => {
     return layer === visibleLayer
   }
-
 
   const _handleSubmit = (): void => {
     console.log('TODO: create attendees')
@@ -26,10 +24,14 @@ const PurchasePage: React.FC = (): JSX.Element => {
       .then(setPurchase)
   }, [preferenceId])
 
+  useEffect(() => {
+    purchase?.status === 'approved' && setVisibleLayer(Layers.SUCCESS)
+  }, [purchase])
+
   return (
     <>
       <Layer
-        isVisible={shouldBeVisible(Layers.ATTENDEES)}
+        isVisible={shouldBeVisible(Layers.SUCCESS)}
         onClose={() => window.location.replace('/')}
       >
         <LayoutContainer>
@@ -55,16 +57,14 @@ const PurchasePage: React.FC = (): JSX.Element => {
       </Layer>
 
       <Layer
-        isVisible={shouldBeVisible(Layers.SUCCESS)}
-        onClose={console.log}
+        isVisible={shouldBeVisible(Layers.ATTENDEES)}
+        onClose={() => window.location.replace('/')}
       >
         <LayoutContainer>
-          <H2>Inscrição realizada</H2>
+          <H2>Dados da compra</H2>
 
-          <Button onClick={console.log}>
-            Fechar
-          </Button>
-
+          Id: {purchase?.preferenceId}
+          Status: {purchase?.status}
         </LayoutContainer>
       </Layer>
     </>

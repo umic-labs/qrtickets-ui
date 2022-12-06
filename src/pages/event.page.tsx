@@ -22,7 +22,7 @@ const EventPage: React.FC = (): JSX.Element => {
   const [selectedItems, setSelectedItems] = useState<Item[]>([])
   const [visibleLayer, setVisibleLayer] = useState<number>(Layers.EVENT)
 
-  const id = 1
+  const id = process.env.REACT_APP_DEFAULT_EVENT
   const { t } = useTranslation()
 
   const shouldBeVisible = (layer: number): boolean => {

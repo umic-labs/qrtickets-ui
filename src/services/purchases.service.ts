@@ -39,6 +39,17 @@ export const PurchasesService = {
 
     return purchase
   },
+
+  async feedback(
+    { preferenceId, params }: { preferenceId: string, params?: unknown },
+  ): Promise<Purchase> {
+    const purchase = await PurchasesApi.feedback({ preferenceId, params })
+      .then((response) => {
+        return composePurchase(response?.data.data)
+      })
+
+    return purchase
+  },
 }
 
 const composePayload = ({

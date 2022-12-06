@@ -4,7 +4,7 @@ import { H5 } from '../../shared'
 import ReactMarkdown from 'react-markdown'
 
 export const Wrapper = styled('div')`
-  padding-bottom: 120px;
+  padding-bottom: 220px;
 `
 
 export const Subtitle = styled(H5)`
