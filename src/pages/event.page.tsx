@@ -6,7 +6,6 @@ import {
   CartPanel,
   EventInfo,
   FooterPanel,
-  FormAttendee,
   TicketItem,
 } from '../components/event'
 import { useTranslation } from 'react-i18next'
@@ -55,6 +54,8 @@ const EventPage: React.FC = (): JSX.Element => {
     EventsService.fetchOne({ id: Number(id) }).then(setEvent)
   }, [id])
 
+  const isValidTickets = !!selectedItems.length
+
   return (
     <>
       <Layer isVisible={shouldBeVisible(Layers.EVENT)} isMain>
@@ -86,31 +87,7 @@ const EventPage: React.FC = (): JSX.Element => {
         <CartPanel
           items={selectedItems}
           onContinue={() => setVisibleLayer(Layers.PURCHASE)}
-        />
-      </Layer>
-
-      <Layer
-        isVisible={shouldBeVisible(Layers.ATTENDEES)}
-        onClose={() => setVisibleLayer(Layers.EVENT)}
-      >
-        <LayoutContainer>
-          <H2>Quem vai participar?</H2>
-
-          {selectedItems.map((item) => (
-            Array(item.amount).fill(item.ticket).map((ticket, i) => (
-              <FormAttendee
-                uid={composeId(ticket, i)}
-                onChange={handleChange}
-                key={ticket.title}
-                ticket={ticket}
-              />
-            ))
-          ))}
-        </LayoutContainer>
-
-        <CartPanel
-          items={selectedItems}
-          onContinue={() => setVisibleLayer(Layers.PURCHASE)}
+          isDisabled={!isValidTickets}
         />
       </Layer>
 
