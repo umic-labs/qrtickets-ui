@@ -8,6 +8,7 @@ import { InfoPrice, TotalItems, WrapperCart } from './styles'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 interface Props {
   items?: Item[]
+  isDisabled?: boolean
   onContinue: (totalPrice: number) => void
 }
 
@@ -28,6 +29,7 @@ export const CartPanel: React.FC<Props> = (props: Props): JSX.Element => {
         <Button
           onClick={() => props.onContinue(totalPrice)}
           variant="contained"
+          disabled={props.isDisabled}
         >
           {t('chart_panel.continue')}
           <ArrowForwardIosIcon sx={{ fontSize: 16, marginLeft: '8px' }} />

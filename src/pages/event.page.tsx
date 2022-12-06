@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Topbar, LayoutContainer, Layer, H2 } from '../components/shared'
-import { Attendee, Event, Item, Ticket } from '../models'
+import { Attendee, Event, Item } from '../models'
 import { EventsService, PurchasesService } from '../services'
 import {
   CartPanel,
   EventInfo,
   FooterPanel,
-  FormAttendee,
   TicketItem,
 } from '../components/event'
 import { useTranslation } from 'react-i18next'
 import { Button, FormControl, TextField } from '@mui/material'
+import validator from 'validator'
+import { cpf as CPF } from 'cpf-cnpj-validator'
 
 
 const EventPage: React.FC = (): JSX.Element => {
@@ -34,7 +35,7 @@ const EventPage: React.FC = (): JSX.Element => {
     setSelectedItems(nextSelectedItems)
   }
 
-  const handleChange = (attendee: Attendee): void => {
+  const _handleChange = (attendee: Attendee): void => {
     const offsetAttendees = attendees.filter((prevAttendee) => (
       attendee.uid !== prevAttendee.uid
     ))
@@ -54,6 +55,16 @@ const EventPage: React.FC = (): JSX.Element => {
   useEffect(() => {
     EventsService.fetchOne({ id: Number(id) }).then(setEvent)
   }, [id])
+  
+  const isValidTickets = !!selectedItems.length
+
+  const isValidEmail = shouldValidateEmail(email)
+  const isValidName = shouldValidateName(name)
+  const isValidCpf = shouldValidateCpf(cpf)
+  
+  const isValidPurchase = shouldValidateFields(
+    [isValidEmail, isValidName, isValidCpf],
+  )
 
   return (
     <>
@@ -86,31 +97,7 @@ const EventPage: React.FC = (): JSX.Element => {
         <CartPanel
           items={selectedItems}
           onContinue={() => setVisibleLayer(Layers.PURCHASE)}
-        />
-      </Layer>
-
-      <Layer
-        isVisible={shouldBeVisible(Layers.ATTENDEES)}
-        onClose={() => setVisibleLayer(Layers.EVENT)}
-      >
-        <LayoutContainer>
-          <H2>Quem vai participar?</H2>
-
-          {selectedItems.map((item) => (
-            Array(item.amount).fill(item.ticket).map((ticket, i) => (
-              <FormAttendee
-                uid={composeId(ticket, i)}
-                onChange={handleChange}
-                key={ticket.title}
-                ticket={ticket}
-              />
-            ))
-          ))}
-        </LayoutContainer>
-
-        <CartPanel
-          items={selectedItems}
-          onContinue={() => setVisibleLayer(Layers.PURCHASE)}
+          isDisabled={!isValidTickets}
         />
       </Layer>
 
@@ -123,11 +110,13 @@ const EventPage: React.FC = (): JSX.Element => {
 
           <FormControl fullWidth>
             <TextField
-              label="Nome"
+              label="Nome completo"
               variant="outlined"
               value={name}
               onChange={(e) => setName(e.target.value)}
               sx={{ marginBottom: '8px' }}
+              color={(!isValidName && name) ? 'error' : 'primary'}
+              helperText={(!isValidName && name) && 'Nome inválido'}
             />
 
             <TextField
@@ -137,6 +126,8 @@ const EventPage: React.FC = (): JSX.Element => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               sx={{ marginBottom: '8px ' }}
+              color={(!isValidEmail && email) ? 'error' : 'primary'}
+              helperText={(!isValidEmail && email) && 'Email inválido'}
             />
 
             <TextField
@@ -146,11 +137,17 @@ const EventPage: React.FC = (): JSX.Element => {
               value={cpf}
               onChange={(e) => setCpf(e.target.value)}
               sx={{ marginBottom: '8px ' }}
+              color={(!isValidCpf && cpf) ? 'error' : 'primary'}
+              helperText={(!isValidCpf && cpf) && 'CPF inválido'}
             />
           </FormControl>
         </LayoutContainer>
 
-        <CartPanel items={selectedItems} onContinue={handleSubmit} />
+        <CartPanel
+          items={selectedItems}
+          onContinue={handleSubmit}
+          isDisabled={!isValidPurchase}
+        />
       </Layer>
 
       <Layer
@@ -193,6 +190,15 @@ function composeSelectedItems(selectedItems: Item[], item: Item) {
   return nextSelectedItems
 }
 
-function composeId(ticket: Ticket, index: number): string {
-  return `${ticket.id}-${index+1}`
+function shouldValidateFields( fields: boolean[] ): boolean {
+  return fields.every(field => field)
 }
+
+const shouldValidateEmail = (email: string) => validator.isEmail(email)
+
+const shouldValidateName = (name: string) => {
+  const hasSurname = name.split(' ').length > 1
+  return !validator.isEmpty(name) && hasSurname
+}
+
+const shouldValidateCpf = (cpf: string) => CPF.isValid(cpf)
