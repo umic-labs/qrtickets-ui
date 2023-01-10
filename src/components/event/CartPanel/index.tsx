@@ -9,7 +9,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 interface Props {
   items?: Item[]
   isDisabled?: boolean
-  onContinue: (totalPrice: number) => void
+  onContinue: () => void
 }
 
 export const CartPanel: React.FC<Props> = (props: Props): JSX.Element => {
@@ -27,7 +27,7 @@ export const CartPanel: React.FC<Props> = (props: Props): JSX.Element => {
 
       <div>
         <Button
-          onClick={() => props.onContinue(totalPrice)}
+          onClick={() => props.onContinue()}
           variant="contained"
           disabled={props.isDisabled}
         >

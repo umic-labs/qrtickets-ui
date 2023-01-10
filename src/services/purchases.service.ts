@@ -1,4 +1,4 @@
-import { Attendee, Purchase } from '../models'
+import { Attendee, Item, Purchase } from '../models'
 import { PurchasesApi } from '../api/purchases.api'
 import { IData } from '../config/types'
 
@@ -7,8 +7,9 @@ interface PropsCreate {
   cpf: string
   email: string
   eventId: number
+  items: Item[]
   name: string
-  total: number
+  phoneNumber: string
 }
 
 export const PurchasesService = {
@@ -17,12 +18,11 @@ export const PurchasesService = {
     cpf,
     email,
     eventId,
+    items,
     name,
-    total,
+    phoneNumber,
   }: PropsCreate): Promise<Purchase> {
-    const payload = composePayload(
-      { name, email, cpf, attendees, total, eventId },
-    )
+    const payload = composePayload( { name, email, cpf, attendees, eventId, items, phoneNumber } )
 
     const purchase = await PurchasesApi.create(payload).then((response) => {
       return composePurchase(response.data.data)
@@ -53,20 +53,18 @@ export const PurchasesService = {
 }
 
 const composePayload = ({
-  attendees,
-  cpf,
-  email,
-  eventId,
-  name,
-  total,
+  attendees, cpf, email, eventId, name, items, phoneNumber,
 }: PropsCreate) => {
+  const itemsPayload = composeItemsPayload(items)
+
   return {
     data: {
       cpf,
       email,
       event: eventId,
+      items: itemsPayload,
       name,
-      total,
+      phoneNumber,
       Attendees: {
         data: attendees,
       },
@@ -76,8 +74,6 @@ const composePayload = ({
 
 const composePurchase = (data: IData): Purchase => {
   const { attributes } = data
-
-  console.log({ data })
 
   return {
     id: data.id,
@@ -91,3 +87,25 @@ const composePurchase = (data: IData): Purchase => {
     // attendees: Attendee[]
   }
 }
+
+interface ItemPayload {
+    id: number
+    title: string
+    currency_id: string
+    description: string
+    category_id: string
+    quantity: number
+    unit_price: number  // in BRL units
+}
+
+const composeItemsPayload = (items: Item[]): ItemPayload[] => {
+  return items.map( item => ({
+    id: Number(item.ticket.id),
+    title: item.ticket.title,
+    currency_id: 'BRL',
+    description: item.ticket.description,
+    category_id: 'art',
+    quantity: item.amount,
+    unit_price: (item.ticket.price/100),
+  }))
+} 

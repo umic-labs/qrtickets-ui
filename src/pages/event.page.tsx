@@ -18,6 +18,7 @@ const EventPage: React.FC = (): JSX.Element => {
   const [attendees, setAttendees] = useState<Attendee[]>([])
   const [cpf, setCpf] = useState<string>('')
   const [email, setEmail] = useState<string>('')
+  const [phoneNumber, setPhoneNumber] = useState<string>('')
   const [event, setEvent] = useState<Event>()
   const [name, setName] = useState<string>('')
   const [selectedItems, setSelectedItems] = useState<Item[]>([])
@@ -44,9 +45,11 @@ const EventPage: React.FC = (): JSX.Element => {
     setAttendees(nextAttendees)
   }
 
-  const handleSubmit = (total: number): void => {
+  const handleSubmit = (): void => {
+    const eventId = Number(id) 
+
     PurchasesService.create(
-      { name, email, cpf, attendees, total, eventId: Number(id) },
+      { name, email, cpf, attendees, eventId, items: selectedItems, phoneNumber },
     ).then((purchase) => {
       window.location.replace(purchase.preference.init_point)
     })
@@ -61,10 +64,9 @@ const EventPage: React.FC = (): JSX.Element => {
   const isValidEmail = shouldValidateEmail(email)
   const isValidName = shouldValidateName(name)
   const isValidCpf = shouldValidateCpf(cpf)
+  const isValidPhoneNumber = shouldValidatePhoneNumber(phoneNumber)
   
-  const isValidPurchase = shouldValidateFields(
-    [isValidEmail, isValidName, isValidCpf],
-  )
+  const isValidPurchase = shouldValidateFields([isValidEmail, isValidName, isValidCpf])
 
   return (
     <>
@@ -136,9 +138,22 @@ const EventPage: React.FC = (): JSX.Element => {
               variant="outlined"
               value={cpf}
               onChange={(e) => setCpf(e.target.value)}
-              sx={{ marginBottom: '8px ' }}
+              sx={{ marginBottom: '8px' }}
               color={(!isValidCpf && cpf) ? 'error' : 'primary'}
               helperText={(!isValidCpf && cpf) && 'CPF inválido'}
+            />
+
+            <TextField
+              id="outlined-basic"
+              label="Telefone com DDD"
+              variant="outlined"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              sx={{ marginBottom: '8px' }}
+              color={(!isValidPhoneNumber && phoneNumber) ? 'error' : 'primary'}
+              helperText={
+                (!isValidPhoneNumber && phoneNumber) && 'Telefone inválido (somente números)'
+              }
             />
           </FormControl>
         </LayoutContainer>
@@ -160,7 +175,6 @@ const EventPage: React.FC = (): JSX.Element => {
           <Button onClick={() => setVisibleLayer(Layers.TICKETS)}>
             Fechar
           </Button>
-
         </LayoutContainer>
       </Layer>
     </>
@@ -190,9 +204,7 @@ function composeSelectedItems(selectedItems: Item[], item: Item) {
   return nextSelectedItems
 }
 
-function shouldValidateFields( fields: boolean[] ): boolean {
-  return fields.every(field => field)
-}
+const shouldValidateFields = (fields: boolean[]): boolean => fields.every(field => field)
 
 const shouldValidateEmail = (email: string) => validator.isEmail(email)
 
@@ -202,3 +214,8 @@ const shouldValidateName = (name: string) => {
 }
 
 const shouldValidateCpf = (cpf: string) => CPF.isValid(cpf)
+
+const shouldValidatePhoneNumber = (phoneNumber: string) => {
+  const BR_PHONE_NUMBER = /^[0-9]{2}?[0-9]{9}$/
+  return  phoneNumber.match(BR_PHONE_NUMBER)
+}
