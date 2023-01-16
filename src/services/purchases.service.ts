@@ -56,6 +56,7 @@ const composePayload = ({
   attendees, cpf, email, eventId, name, items, phoneNumber,
 }: PropsCreate) => {
   const itemsPayload = composeItemsPayload(items)
+  const total = composeTotal(items)
 
   return {
     data: {
@@ -65,6 +66,7 @@ const composePayload = ({
       items: itemsPayload,
       name,
       phoneNumber,
+      total,
       Attendees: {
         data: attendees,
       },
@@ -109,3 +111,11 @@ const composeItemsPayload = (items: Item[]): ItemPayload[] => {
     unit_price: (item.ticket.price/100),
   }))
 } 
+
+const composeTotal = (items: Item[]): number => {
+  const total = items.reduce((acc, item) => {
+    return acc + (item.ticket.price * item.amount)
+  }, 0)
+
+  return total
+}
