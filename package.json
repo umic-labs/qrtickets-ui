@@ -29,6 +29,7 @@
     "react-markdown": "^8.0.3",
     "react-router-dom": "^6.4.4",
     "react-scripts": "5.0.1",
+    "slugify": "^1.6.5",
     "typescript": "*",
     "urlcat": "^2.0.4",
     "validator": "^13.7.0",
