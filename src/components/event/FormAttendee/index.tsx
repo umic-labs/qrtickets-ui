@@ -8,6 +8,7 @@ interface Props {
   onChange: (attendee: Attendee) => void
   uid: string
   ticket: Ticket
+  index: number
 }
 
 export const FormAttendee: React.FC<Props> = (props: Props): JSX.Element => {
@@ -26,7 +27,7 @@ export const FormAttendee: React.FC<Props> = (props: Props): JSX.Element => {
 
   return (
     <>
-      <H3 style={{ margin: '16px 0'}}>{props.ticket.title}</H3>
+      <H3 style={{ margin: '16px 0'}}>{props.ticket.title} {props.index}</H3>
 
       <FormControl fullWidth>
         <TextField

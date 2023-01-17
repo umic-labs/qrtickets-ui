@@ -6,12 +6,15 @@ import {
   CartPanel,
   EventInfo,
   FooterPanel,
+  FormAttendee,
   TicketItem,
+  composeTotalAmount,
 } from '../components/event'
 import { useTranslation } from 'react-i18next'
 import { Button, FormControl, TextField } from '@mui/material'
 import validator from 'validator'
 import { cpf as CPF } from 'cpf-cnpj-validator'
+import slugify from 'slugify'
 
 
 const EventPage: React.FC = (): JSX.Element => {
@@ -36,12 +39,13 @@ const EventPage: React.FC = (): JSX.Element => {
     setSelectedItems(nextSelectedItems)
   }
 
-  const _handleChange = (attendee: Attendee): void => {
+  const handleUpdateAttendee = (attendee: Attendee): void => {
     const offsetAttendees = attendees.filter((prevAttendee) => (
       attendee.uid !== prevAttendee.uid
     ))
     const nextAttendees = [...offsetAttendees, attendee]
-
+    
+    console.log({ nextAttendees })
     setAttendees(nextAttendees)
   }
 
@@ -60,12 +64,11 @@ const EventPage: React.FC = (): JSX.Element => {
   }, [id])
   
   const isValidTickets = !!selectedItems.length
-
+  const isValidAttendees = attendees.length === composeTotalAmount(selectedItems)
   const isValidEmail = shouldValidateEmail(email)
   const isValidName = shouldValidateName(name)
   const isValidCpf = shouldValidateCpf(cpf)
   const isValidPhoneNumber = shouldValidatePhoneNumber(phoneNumber)
-  
   const isValidPurchase = shouldValidateFields([isValidEmail, isValidName, isValidCpf])
 
   return (
@@ -98,9 +101,40 @@ const EventPage: React.FC = (): JSX.Element => {
 
         <CartPanel
           items={selectedItems}
-          onContinue={() => setVisibleLayer(Layers.PURCHASE)}
+          onContinue={() => setVisibleLayer(Layers.ATTENDEES)}
           isDisabled={!isValidTickets}
         />
+      </Layer>
+
+      <Layer
+        isVisible={shouldBeVisible(Layers.ATTENDEES)}
+        onClose={() => setVisibleLayer(Layers.EVENT)}
+      >
+        <LayoutContainer>
+          <H2>Informações dos participantes</H2>
+          
+          {
+            selectedItems.map((item) => {
+              return Array(item.amount).fill('').map((_ticket, key) => {
+                return (
+                  <FormAttendee
+                    onChange={handleUpdateAttendee}
+                    ticket={item.ticket}
+                    key={key}
+                    uid={composeUid(item.ticket.title, key)}
+                    index={key + 1}
+                  />
+                )
+              })
+            })
+          }
+
+          <CartPanel
+            items={selectedItems}
+            onContinue={() => setVisibleLayer(Layers.PURCHASE)}
+            isDisabled={!isValidAttendees}
+          />
+        </LayoutContainer>
       </Layer>
 
       <Layer
@@ -218,4 +252,8 @@ const shouldValidateCpf = (cpf: string) => CPF.isValid(cpf)
 const shouldValidatePhoneNumber = (phoneNumber: string) => {
   const BR_PHONE_NUMBER = /^[0-9]{2}?[0-9]{9}$/
   return  phoneNumber.match(BR_PHONE_NUMBER)
+}
+
+const composeUid = (title: string, index: number): string => {
+  return `${slugify(title)}-${index}`
 }

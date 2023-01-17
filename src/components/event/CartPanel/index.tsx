@@ -39,7 +39,7 @@ export const CartPanel: React.FC<Props> = (props: Props): JSX.Element => {
   )
 }
 
-function composeTotalAmount(items: Item[]): number {
+export function composeTotalAmount(items: Item[]): number {
   if (!items.length) return 0
   return items.reduce((acc, item) => (item.amount + acc), 0)
 }

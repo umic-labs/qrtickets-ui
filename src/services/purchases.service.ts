@@ -67,9 +67,7 @@ const composePayload = ({
       name,
       phoneNumber,
       total,
-      Attendees: {
-        data: attendees,
-      },
+      attendees_data: attendees,
     },
   }
 }
