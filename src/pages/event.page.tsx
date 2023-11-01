@@ -44,13 +44,13 @@ const EventPage: React.FC = (): JSX.Element => {
       attendee.uid !== prevAttendee.uid
     ))
     const nextAttendees = [...offsetAttendees, attendee]
-    
+
     console.log({ nextAttendees })
     setAttendees(nextAttendees)
   }
 
   const handleSubmit = (): void => {
-    const eventId = Number(id) 
+    const eventId = Number(id)
 
     PurchasesService.create(
       { name, email, cpf, attendees, eventId, items: selectedItems, phoneNumber },
@@ -62,7 +62,7 @@ const EventPage: React.FC = (): JSX.Element => {
   useEffect(() => {
     EventsService.fetchOne({ id: Number(id) }).then(setEvent)
   }, [id])
-  
+
   const isValidTickets = !!selectedItems.length
   const isValidAttendees = attendees.length === composeTotalAmount(selectedItems)
   const isValidEmail = shouldValidateEmail(email)
@@ -79,7 +79,9 @@ const EventPage: React.FC = (): JSX.Element => {
 
           <EventInfo event={event} />
 
+          {/*
           <FooterPanel onSubmit={() => setVisibleLayer(Layers.TICKETS)} />
+          */}
         </LayoutContainer>
       </Layer>
 
@@ -112,7 +114,7 @@ const EventPage: React.FC = (): JSX.Element => {
       >
         <LayoutContainer>
           <H2>Informações dos participantes</H2>
-          
+
           {
             selectedItems.map((item) => {
               return Array(item.amount).fill('').map((_ticket, key) => {
@@ -251,7 +253,7 @@ const shouldValidateCpf = (cpf: string) => CPF.isValid(cpf)
 
 const shouldValidatePhoneNumber = (phoneNumber: string) => {
   const BR_PHONE_NUMBER = /^[0-9]{2}?[0-9]{9}$/
-  return  phoneNumber.match(BR_PHONE_NUMBER)
+  return phoneNumber.match(BR_PHONE_NUMBER)
 }
 
 const composeUid = (title: string, index: number): string => {
